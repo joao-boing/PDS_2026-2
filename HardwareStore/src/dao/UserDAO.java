@@ -9,9 +9,6 @@ import java.sql.SQLException;
 
 public class UserDAO {
 
-    // Devolve o usuario correspondente, ou null quando usuario/senha nao batem.
-    // OBS: num sistema real, compare um HASH da senha (ex.: BCrypt),
-    // nunca texto puro. Mantido simples aqui para fins didaticos.
     public User authenticate(String username, String password) throws SQLException {
         String sql = "SELECT id, username, password FROM user WHERE username = ? AND password = ?";
         try (Connection con = DBConnection.open();
@@ -23,7 +20,7 @@ public class UserDAO {
                 if (rs.next()) {
                     return new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"));
                 }
-                return null; // nenhuma linha encontrada
+                return null;
             }
         }
     }

@@ -7,13 +7,12 @@ public class Product {
     private String productType;
     private String model;
     private int stockQuantity;
+    private byte[] photo;
 
-    // Produto NOVO: o id fica 0 porque quem gera o id e o banco.
     public Product(String productName, String brand, String productType, String model, int stockQuantity) {
         this(0, productName, brand, productType, model, stockQuantity);
     }
 
-    // Produto que VEIO do banco: o id ja existe.
     public Product(int id, String productName, String brand, String productType, String model, int stockQuantity) {
         this.id = id;
         this.productName = productName;
@@ -71,13 +70,18 @@ public class Product {
         this.stockQuantity = stockQuantity;
     }
 
-    /**
-     * AS REGRAS DESTE PRODUTO, sozinho.
-     *
-     * Devolve null quando esta tudo certo, ou o texto do problema.
-     * Assim quem chama so precisa testar se veio null, e a mensagem
-     * ja vem pronta para ser exibida.
-     */
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public boolean hasPhoto() {
+        return photo != null && photo.length > 0;
+    }
+
     public String validate() {
         if (productName == null || productName.trim().isEmpty()) {
             return "Preencha o nome do produto.";
@@ -94,7 +98,7 @@ public class Product {
         if (stockQuantity < 0) {
             return "A quantidade em estoque nao pode ser negativa.";
         }
-        return null; // null significa "sem problema"
+        return null;
     }
 
     @Override

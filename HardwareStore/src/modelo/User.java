@@ -39,7 +39,6 @@ public class User {
         this.password = password;
     }
 
-    // AS REGRAS DESTE USUARIO, sozinho.
     public String validate() {
         if (username == null || username.trim().isEmpty()) {
             return "Preencha o usuario.";

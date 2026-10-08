@@ -9,13 +9,10 @@ public class DBConnection {
     private static final String USER = "store_user";
     private static final String PASSWORD = "store_pw";
 
-    // Abre uma conexao NOVA. Quem chamou e responsavel por fechar.
     public static Connection open() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    // Teste de ambiente: rode esta classe quando quiser saber se o
-    // problema esta na sua maquina e nao no seu codigo.
     public static void main(String[] args) {
         try (Connection con = open()) {
             System.out.println("Conexao estabelecida.");
