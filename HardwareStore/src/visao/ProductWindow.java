@@ -12,6 +12,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,11 +30,15 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -81,6 +87,12 @@ public class ProductWindow extends JFrame {
 
     private JLabel lblStatus = new JLabel(" Pronto.");
 
+    // Itens do menu
+    private JMenuItem miLimpar;
+    private JMenuItem miSair;
+    private JMenuItem miManual;
+    private JMenuItem miSobre;
+
     private boolean reloading = false;
     private boolean editing = false;
     private int editingId = 0;
@@ -127,12 +139,21 @@ public class ProductWindow extends JFrame {
         add(createDetailPanel(), BorderLayout.EAST);
         add(lblStatus, BorderLayout.SOUTH);
 
+        // ---------- o menu ----------
+        setJMenuBar(criarMenu());
+
         btnNew.addActionListener(e -> newProduct());
         btnEdit.addActionListener(e -> enterEdit(getSelectedProduct()));
         btnDelete.addActionListener(e -> delete());
         btnChoosePhoto.addActionListener(e -> choosePhoto());
         btnSave.addActionListener(e -> save());
         btnCancel.addActionListener(e -> cancel());
+
+        miLimpar.addActionListener(e -> limparCampos());
+        miSair.addActionListener(e -> System.exit(0));
+        miManual.addActionListener(e -> mostrarManual());
+        miSobre.addActionListener(e -> mostrarSobre());
+
         cbType.addActionListener(e -> {
             if (!reloading) {
                 refreshScreen(selectedId());
@@ -154,6 +175,58 @@ public class ProductWindow extends JFrame {
         });
 
         refreshScreen(0);
+    }
+
+    /** Monta a barra de menus: Arquivo e Ajuda. */
+    private JMenuBar criarMenu() {
+        JMenuBar barra = new JMenuBar();
+
+        JMenu menuArquivo = new JMenu("Arquivo");
+        menuArquivo.setMnemonic(KeyEvent.VK_A);
+
+        miLimpar = new JMenuItem("Limpar campos");
+        miLimpar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_DOWN_MASK));
+        menuArquivo.add(miLimpar);
+
+        menuArquivo.addSeparator();
+
+        miSair = new JMenuItem("Sair");
+        miSair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_DOWN_MASK));
+        menuArquivo.add(miSair);
+
+        JMenu menuAjuda = new JMenu("Ajuda");
+        menuAjuda.setMnemonic(KeyEvent.VK_J);
+
+        miManual = new JMenuItem("Manual de uso");
+        miManual.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+        menuAjuda.add(miManual);
+
+        miSobre = new JMenuItem("Sobre");
+        menuAjuda.add(miSobre);
+
+        barra.add(menuArquivo);
+        barra.add(menuAjuda);
+        return barra;
+    }
+
+    public void mostrarSobre() {
+        new JanelaSobre(this).setVisible(true);
+    }
+
+    public void mostrarManual() {
+        new JanelaManual(this).setVisible(true);
+    }
+
+    private void limparCampos() {
+        if (editing) {
+            txtProductName.setText("");
+            txtBrand.setText("");
+            txtProductType.setText("");
+            txtModel.setText("");
+            txtStockQuantity.setText("");
+        } else {
+            txtSearch.setText("");
+        }
     }
 
     private JPanel createCommandBar() {

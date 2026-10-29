@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>Manual de uso</title>
+<style type="text/css">
+  body { font-family: SansSerif; font-size: 11pt; margin: 10px; }
+  h1 { color: #2c6e63; }
+  h2 { color: #2c6e63; }
+  th { background-color: #e3eedd; text-align: left; }
+</style>
+</head>
+<body>
+
+<h1>Manual de uso - Loja de Hardware</h1>
+
+<h2>1. Para que serve</h2>
+<p>O programa cadastra os produtos da loja em um banco de dados MySQL.
+Para cada produto sao registrados o <b>nome</b>, a <b>marca</b>, o <b>tipo</b>,
+o <b>modelo</b>, a quantidade em <b>estoque</b> e uma <b>foto</b>.</p>
+
+<h2>2. Cadastrar um produto</h2>
+<ol>
+  <li>Clique em <b>Novo</b>.</li>
+  <li>Preencha os campos e, se quiser, clique em <b>Escolher foto</b>.</li>
+  <li>Clique em <b>Salvar</b>.</li>
+</ol>
+
+<h2>3. Outras opcoes</h2>
+<ul>
+  <li><b>Editar</b> / <b>Excluir</b>: selecione um produto na tabela antes.</li>
+  <li><b>Buscar</b> e <b>Tipo</b>: filtram a tabela.</li>
+  <li><b>Arquivo &gt; Limpar campos</b>: esvazia os campos.</li>
+  <li><b>Arquivo &gt; Sair</b>: encerra o programa.</li>
+  <li><b>Ajuda &gt; Sobre</b>: mostra os autores e a versao.</li>
+</ul>
+
+<h2>4. Mensagens de erro</h2>
+<table border="1" cellpadding="4" cellspacing="0">
+  <tr><th>Mensagem</th><th>O que fazer</th></tr>
+  <tr><td>Preencha o nome do produto.</td><td>Digite o nome.</td></tr>
+  <tr><td>Preencha a marca.</td><td>Digite a marca.</td></tr>
+  <tr><td>Preencha o tipo do produto.</td><td>Digite o tipo.</td></tr>
+  <tr><td>Preencha o modelo.</td><td>Digite o modelo.</td></tr>
+  <tr><td>A quantidade em estoque deve ser um numero inteiro!</td><td>Use apenas digitos.</td></tr>
+  <tr><td>A quantidade em estoque nao pode ser negativa.</td><td>Informe 0 ou mais.</td></tr>
+</table>
+
+<h2>5. Atalhos de teclado</h2>
+<ul>
+  <li><b>F1</b> - abre este manual</li>
+  <li><b>Ctrl+L</b> - limpar campos</li>
+  <li><b>Ctrl+Q</b> - sair</li>
+</ul>
+
+<h2>6. Requisitos</h2>
+<ul>
+  <li>Java 8 ou superior;</li>
+  <li>MySQL em execucao, com o banco <b>hardware_store</b>.</li>
+</ul>
+
+</body>
+</html>
